@@ -1,13 +1,15 @@
-from app import app
-
+from app import app, request, render_template, redirect
+from app.models.User import UserModel
 
 @app.route('/')
 def list_user():
-    return 'home', 200
+    return render_template('index.html')
 
 @app.route('/new')
 def create_user():
-    return 'create user', 201
+    if request.method == 'POST':
+        pass
+    return render_template('create-user.html')
 
 @app.route('/<int:id>')
 def detail_user(id):
@@ -16,7 +18,9 @@ def detail_user(id):
 
 @app.route('/update/<int:id>')
 def update_user(id):
-    return 'update user', 200
+    if request.method == 'POST':
+        pass
+    return render_template('update-user.html'), 200
 
 @app.route('/delete/<int:id>')
 def delete_user(id):
