@@ -13,7 +13,7 @@ def create_user():
 
 @app.route('/<int:id>')
 def detail_user(id):
-    return 'detail user', 200
+    return render_template('detail-user.html')
 
 
 @app.route('/update/<int:id>')

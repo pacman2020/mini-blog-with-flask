@@ -84,3 +84,35 @@ footer{
     border-radius: 4px;
     margin-bottom: 49px;
 }
+
+/* detail  */
+.container .posts .post-body .opitions a button{
+    width: 15%;
+    padding: 14px;
+    border-radius: 4px;
+    margin-top: 10px;
+    color: white;
+    border: 0px;
+}
+
+.container .posts .post-body {
+    margin-top: 4px;
+}
+
+.container .posts .post-body .opitions .edit{
+    background-color: rgb(21, 97, 197);
+}
+
+.container .posts .post-body .opitions a .edit:hover{
+    color: white;
+    background-color: rgb(118, 166, 240);
+}
+
+.container .posts .post-body .opitions .delete{
+    background-color: rgb(197, 21, 21);
+}
+
+.container .posts .post-body .opitions a .delete:hover{
+    color: white;
+    background-color: rgb(240, 110, 110);
+}
