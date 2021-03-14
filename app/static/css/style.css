@@ -16,11 +16,7 @@ header h1{
     color: rgb(245, 245, 245);
 }
 
-.container{
-    margin: 0px 40px;
-    padding: 25px;
-    background-color: rgb(238, 238, 238);
-}
+
 
 nav {
     text-align: center;
@@ -39,21 +35,52 @@ nav ul li a{
 }
 
 nav ul li a:hover {
-    background-color: rgb(158, 158, 158);
+    background-color: rgb(25, 151, 42);
+    color: white;
 }
 
 footer{
     color: white;
-    padding: 20px;
+    padding: 25px;
     text-align: center;
     background: rgb(15, 133, 15);
     margin: 0px 40px;
-    margin-top: 30px;
+    margin-top: 42px;
+}
+
+.container{
+    margin: 0px 40px;
+    padding: 25px;
+    background-color: rgb(238, 238, 238);
 }
 
 .container .posts{
-    padding: 10px;
+    padding: 13px;
     margin: 0px 10px;
     background-color: rgb(202, 202, 202);
     margin-top: 15px;
+}
+
+.container .posts h3{
+    font-size: 25px;
+}
+
+.container form{
+    display: flex;
+    flex-direction: column;
+}
+
+.container form input{
+    padding: 10px;
+    margin-top: 12px;
+}
+
+.container form .btn{
+    margin-top: 45px;
+    font-size: 15px;
+    background-color: rgb(5, 138, 5);
+    border: 0px;
+    color: white;
+    border-radius: 4px;
+    margin-bottom: 49px;
 }
