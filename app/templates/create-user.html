@@ -4,11 +4,11 @@
 
 {% block conteudo %}
 <h3>Create New Post</h3>
-<form action="" method="post">
-    <input type="text" placeholder="username">
-    <input type="email" placeholder="email">
-    <input type="password" placeholder="password">
-    <input type="password2" placeholder="password-again">
+<form action="/new-user" method="POST">
+    {{ form.csrf_token }}
+    {{ form.username(placeholder="username") }}
+    {{ form.email(placeholder="email") }}
+    {{ form.password( placeholder="password") }}
     <input class="btn" type="submit" value="Create">
 </form>
 {% endblock %}

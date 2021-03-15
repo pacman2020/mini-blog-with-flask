@@ -1,15 +1,18 @@
 from app import app, request, render_template, redirect
 from app.models.User import UserModel
+from app.forms import UserForm
 
 @app.route('/')
 def list_user():
     return render_template('index.html')
 
-@app.route('/new')
+@app.route('/new-user',  methods=['GET', 'POST'])
 def create_user():
-    if request.method == 'POST':
-        pass
-    return render_template('create-user.html')
+    form = UserForm(request.form)
+    if request.method == 'POST' and form.validate():
+        print('--->',form.username.data,'<---')
+        return 'save'
+    return render_template('create-user.html', form=form)
 
 @app.route('/<int:id>')
 def detail_user(id):
