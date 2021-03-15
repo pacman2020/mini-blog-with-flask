@@ -10,7 +10,6 @@ def list_user():
 def create_user():
     form = UserForm(request.form)
     if request.method == 'POST' and form.validate():
-        print('--->',form.username.data,'<---')
         return 'save'
     return render_template('create-user.html', form=form)
 

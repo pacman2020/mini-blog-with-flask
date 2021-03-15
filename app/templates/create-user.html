@@ -6,9 +6,11 @@
 <h3>Create New Post</h3>
 <form action="/new-user" method="POST">
     {{ form.csrf_token }}
+
     {{ form.username(placeholder="username") }}
     {{ form.email(placeholder="email") }}
-    {{ form.password( placeholder="password") }}
+    {{ form.password(placeholder="password") }}
+
     <input class="btn" type="submit" value="Create">
 </form>
 {% endblock %}
