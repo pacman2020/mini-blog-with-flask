@@ -26,3 +26,7 @@ class UserModel(db.Model):
         if user:
             return user
         return None
+    
+    def delete_user(self):
+        db.session.delete(self)
+        db.session.commit()

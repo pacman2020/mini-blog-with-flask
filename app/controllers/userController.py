@@ -19,10 +19,6 @@ def create_user():
         return redirect('/list-user')
     return render_template('create-user.html', form=form)
 
-@app.route('/<int:id>')
-def detail_user(id):
-    return render_template('detail-user.html')
-
 @app.route('/update/<int:id>', methods=['GET', 'POST'])
 def update_user(id):
     form = UserFormUpdate(request.form)
@@ -36,4 +32,13 @@ def update_user(id):
 
 @app.route('/delete/<int:id>')
 def delete_user(id):
-    return 'delet user', 200
+    user = UserModel.find_by_user(id)
+    error = 'usuario nao encontrado!'
+    if user:
+        try:
+            user.delete_user()
+            return redirect('/list-user')
+        except:
+            error = 'erro ao deletar usuario'
+            return redirect('/list-user', error=error )
+    return redirect('/list-user', error=error )
