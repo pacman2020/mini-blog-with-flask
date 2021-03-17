@@ -4,9 +4,11 @@
 
 {% block conteudo %}
 <h3>Update Post</h3>
-<form action="" method="post">
-    <label for="" style="margin-top: 5px;">Enter your new username</label>
-    <input type="text" placeholder="username">
-    <input class="btn" type="submit" value="Update Post">
+<form action="/update/{{user.id}}" method="POST">
+    
+    {{ form.csrf_token }}
+    {{ form.username(placeholder="username", value=user.username ) }}
+    
+    <input class="btn" type="submit" value="Update user">
 </form>
 {% endblock %}

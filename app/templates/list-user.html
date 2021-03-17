@@ -10,6 +10,10 @@
         </div>
         <div class="post-body">
             <p>{{user.email}}</p>
+            <div class="opitions" >
+                <a href="/update/{{user.id}}"><button class="edit" >Edit</button></a>
+                <a href=""><button class="delete" >Delete</button></a>
+            </div>
         </div>
     </div>
 {% endfor %}

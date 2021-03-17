@@ -19,3 +19,10 @@ class UserModel(db.Model):
     def save_user(self):
         db.session.add(self)
         db.session.commit()
+    
+    @classmethod  
+    def find_by_user(cls, id):
+        user = UserModel.query.get(id)
+        if user:
+            return user
+        return None
