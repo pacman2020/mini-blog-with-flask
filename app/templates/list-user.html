@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}list user{% endblock %}
+
+{% block conteudo %}
+{% for user in users %}
+    <div class="posts">
+        <div class="post-header">
+            <h3>{{user.username}}</h3>
+        </div>
+        <div class="post-body">
+            <p>{{user.email}}</p>
+        </div>
+    </div>
+{% endfor %}
+
+
+{% endblock %}
