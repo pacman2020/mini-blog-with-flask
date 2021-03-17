@@ -9,8 +9,14 @@ def list_user():
 @app.route('/new-user',  methods=['GET', 'POST'])
 def create_user():
     form = UserForm(request.form)
+    print('--->',form)
     if request.method == 'POST' and form.validate():
-        return 'save'
+        new_user = UserModel(
+            username=form.username.data,
+            email=form.email.data,
+            password=form.password.data)
+        new_user.save_user()
+        return redirect('/')
     return render_template('create-user.html', form=form)
 
 @app.route('/<int:id>')

@@ -10,3 +10,12 @@ class UserModel(db.Model):
     
     def __repr__(self) -> str:
         return f'{self.username}'
+    
+    def __init__(self, username, email, password):
+        self.username = username
+        self.email = email
+        self.password = password
+        
+    def save_user(self):
+        db.session.add(self)
+        db.session.commit()
