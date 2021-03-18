@@ -17,6 +17,7 @@ Migrate(app, db)
 
 #models
 from .models.User import UserModel
+from .models.Publication import PublicationModel
 
 #controllers
 from .controllers import userController
