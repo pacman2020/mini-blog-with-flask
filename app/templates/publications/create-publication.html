@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}create publication{% endblock %}
+
+{% block conteudo %}
+<h3>Create New Publication</h3>
+<form action="/new-publication" method="POST">
+    {{ form.csrf_token }}
+
+    {{ form.title(placeholder="title") }}
+    {{ form.img(placeholder="description") }}
+    {{ form.description(placeholder="description") }}
+
+    <input class="btn" type="submit" value="Create">
+</form>
+{% endblock %}
