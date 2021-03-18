@@ -20,4 +20,4 @@ from .models.User import UserModel
 from .models.Publication import PublicationModel
 
 #controllers
-from .controllers import userController
+from .controllers import userController, publicationController

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}list publications{% endblock %}
+
+{% block conteudo %}
+<a href="#"><button>new-publication</button></a>
+{% for publication in publications %}
+    <div class="posts">
+        <div class="post-header">
+            <h3>{{publication.title}}</h3>
+        </div>
+        <div class="post-body">
+            <p>{{publication.title}}</p>
+            <p>{{publication.description}}</p>
+        </div>
+    </div>
+{% endfor %}
+
+
+{% endblock %}
