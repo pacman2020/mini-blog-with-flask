@@ -14,12 +14,13 @@ def home():
 
 @app.route('/new-publication', methods=['GET', 'POST'])
 def create_publication():
-    data = request.form.to_dict() #pegando dados formulario
-    data['photo'] = request.files #pegando image
+    name_img = request.files.get('photo')
+    dados = request.form.to_dict() #pegando dados formulario
+    dados['photo'] = name_img.filename #pegando image
     
-    form = PublicationForm(**data)
+    form = PublicationForm(**dados)
 
     if request.method == 'POST' and form.validate():
-        print('<<<---->>>', form.data)
+        print('<<<---->>>', form.data )
         return 'salve'
     return render_template('publications/create-publication.html', form=form)
