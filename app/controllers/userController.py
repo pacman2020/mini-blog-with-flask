@@ -16,7 +16,7 @@ def create_user():
             email=form.email.data,
             password=form.password.data)
         new_user.save_user()
-        return redirect('users/list-user')
+        return redirect('/list-user')
     return render_template('users/create-user.html', form=form)
 
 @app.route('/update/<int:id>', methods=['GET', 'POST'])
@@ -27,7 +27,7 @@ def update_user(id):
     if request.method == 'POST' and form.validate():
         user.username=form.username.data
         user.save_user()
-        return redirect('list-user')
+        return redirect('/list-user')
     return render_template('users/update-user.html', form=form, user=user )
 
 @app.route('/delete/<int:id>')

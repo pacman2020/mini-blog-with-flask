@@ -14,9 +14,9 @@ def home():
 
 @app.route('/new-publication', methods=['GET', 'POST'])
 def create_publication():
-    name_img = request.files.get('photo')
     dados = request.form.to_dict() #pegando dados formulario
-    dados['photo'] = name_img.filename
+    dados['photo'] = request.files.get('photo') #pegando arquivo files
+    
     form = PublicationForm(**dados)
 
     if request.method == 'POST' and form.validate():
@@ -24,7 +24,13 @@ def create_publication():
         new_publication = PublicationModel(
             title=form.title.data,
             photo=form.photo.data,
-            description=form.description.data)
+            description=form.description.data
+            )
+        name_photo = form.photo.data #pegando nomde image
+        
+        new_publication.photo = name_photo.filename
+        new_publication.user_id = 1
+        
         new_publication.save_publication()
         return redirect('/')
     return render_template('publications/create-publication.html', form=form)
