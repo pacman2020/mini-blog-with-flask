@@ -16,11 +16,15 @@ def home():
 def create_publication():
     name_img = request.files.get('photo')
     dados = request.form.to_dict() #pegando dados formulario
-    dados['photo'] = name_img.filename #pegando image
-    
+    dados['photo'] = name_img.filename
     form = PublicationForm(**dados)
 
     if request.method == 'POST' and form.validate():
-        print('<<<---->>>', form.data )
-        return 'salve'
+        
+        new_publication = PublicationModel(
+            title=form.title.data,
+            photo=form.photo.data,
+            description=form.description.data)
+        new_publication.save_publication()
+        return redirect('/')
     return render_template('publications/create-publication.html', form=form)
