@@ -1,4 +1,4 @@
-from wtforms import StringField, Form, FileField
+from wtforms import StringField, Form, FileField, TextAreaField
 from wtforms.validators import DataRequired
 
 class UserForm(Form):
@@ -11,5 +11,5 @@ class UserFormUpdate(Form):
     
 class PublicationForm(Form):
     title = StringField('Title', validators=[DataRequired()])
-    img = FileField('img')
-    description = StringField('Description', validators=[DataRequired()])
+    photo = FileField('Photo')
+    description = TextAreaField('description')

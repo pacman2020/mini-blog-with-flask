@@ -4,13 +4,14 @@
 
 {% block conteudo %}
 <h3>Create New Publication</h3>
-<form action="/new-publication" method="POST">
+<form action="/new-publication" method="POST" enctype="multipart/form-data">
     {{ form.csrf_token }}
 
     {{ form.title(placeholder="title") }}
-    {{ form.img(placeholder="description") }}
-    {{ form.description(placeholder="description") }}
-
+    {{ form.photo }}
+    {{ form.description }}
+    
     <input class="btn" type="submit" value="Create">
 </form>
 {% endblock %}
+

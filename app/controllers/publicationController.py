@@ -1,6 +1,7 @@
 from app import app, request, render_template, redirect
 from app.models.Publication import PublicationModel
-from app.forms import PublicationForm
+from app.forms import PublicationForm 
+
 
 @app.route('/')
 def home():
@@ -11,9 +12,14 @@ def home():
     ]
     return render_template('publications/list-publication.html', publications=publications)
 
-@app.route('/create-publication')
+@app.route('/new-publication', methods=['GET', 'POST'])
 def create_publication():
-    form = PublicationForm()
+    data = request.form.to_dict() #pegando dados formulario
+    data['photo'] = request.files #pegando image
+    
+    form = PublicationForm(**data)
+
     if request.method == 'POST' and form.validate():
+        print('<<<---->>>', form.data)
         return 'salve'
     return render_template('publications/create-publication.html', form=form)
