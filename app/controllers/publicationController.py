@@ -5,11 +5,7 @@ from app.forms import PublicationForm
 
 @app.route('/')
 def home():
-    publications = [
-        {'title':'saasas',
-         'description':'aasdada'
-        }
-    ]
+    publications = PublicationModel.query.all()
     return render_template('publications/list-publication.html', publications=publications)
 
 @app.route('/new-publication', methods=['GET', 'POST'])
