@@ -61,3 +61,11 @@ def detail_publication(id):
     if publication:
         return render_template('publications/detail-publication.html', publication=publication)
     return redirect('/')
+
+@app.route('/delete/<int:id>')
+def delete_publication(id):
+    publication = PublicationModel.query.get(id)
+    if publication:
+        publication.delete_publication()
+        return  redirect('/')
+    return redirect('/')

@@ -25,3 +25,7 @@ class PublicationModel(db.Model):
         if publication:
             return publication
         return None
+    
+    def delete_publication(self):
+        db.session.delete(self)
+        db.session.commit()
