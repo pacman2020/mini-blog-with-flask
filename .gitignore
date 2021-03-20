@@ -3,3 +3,4 @@ __pycache__/
 migrations/
 dev.db
 __init__.pyc
+uploads/
