@@ -10,11 +10,13 @@ from app.models.Publication import PublicationModel
 from app.forms import PublicationForm
 
 
-#cria login pega usuario logado par user_id
 #privatiza rotas
 #paginação
+#cria login pega usuario logado pra user_id
+#criptografa senha
+#deletar usuario deletar tudo sore ele
 #filtro de busca
-#delete e update publicação
+#update publicação
 
 @app.route('/')
 def home():
