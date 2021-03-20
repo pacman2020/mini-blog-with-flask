@@ -54,3 +54,10 @@ def create_publication():
             new_publication.save_publication()
             return redirect('/')
     return render_template('publications/create-publication.html', form=form)
+
+@app.route('/<int:id>')
+def detail_publication(id):
+    publication = PublicationModel.find_by_publication(id=id)
+    if publication:
+        return render_template('publications/detail-publication.html', publication=publication)
+    return redirect('/')

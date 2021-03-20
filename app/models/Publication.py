@@ -18,3 +18,10 @@ class PublicationModel(db.Model):
     def save_publication(self):
         db.session.add(self)
         db.session.commit()
+        
+    @classmethod  
+    def find_by_publication(cls, id):
+        publication = PublicationModel.query.get(id)
+        if publication:
+            return publication
+        return None
