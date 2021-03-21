@@ -3,7 +3,7 @@
 {% block title %}list publications{% endblock %}
 
 {% block conteudo %}
-<a href="/new-publication"><button>new-publication</button></a>
+<a href="{{ url_for('create_publication' ) }}"><button>new-publication</button></a>
 {% for publication in publications %}
     <div class="posts">
         <div class="post-header">
@@ -12,7 +12,7 @@
         <div class="post-body">
             <p>{{publication.title}}</p>
             <p>{{publication.description}}</p>
-            <p><a href="/{{ publication.id }}">veja mais...</a></p>
+            <p><a href="{{ url_for('detail_publication', id=publication.id ) }}">veja mais...</a></p>
         </div>
     </div>
 {% endfor %}

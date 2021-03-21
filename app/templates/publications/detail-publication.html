@@ -7,13 +7,15 @@
 <div class="posts">
     <div class="post-header">
         <h3>{{publication.title}}</h3>
-        <img width="50%" src="static/uploads/{{publication.photo}}" alt="">
+        <img width="50%" 
+            src="/static/uploads/{{publication.photo}}" alt="">
     </div>
     <div class="post-body">
         <p>{{publication.description}}</p>
+        <p>{{publication.photo}}</p>
         <p>data: 20/04/2021</p>
         <div class="opitions" >
-            <a  href="{{ url_for('update_publication', id=publication.id  ) }}"><button class="edit" >Edit</button></a>
+            <a  href="#"><button class="edit" >Edit</button></a>
             <a href="{{ url_for('delete_publication', id=publication.id  ) }}">
                 <button 
                     onclick="return confirm('deseja excluir esta publicação')" 
