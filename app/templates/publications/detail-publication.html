@@ -13,8 +13,8 @@
         <p>{{publication.description}}</p>
         <p>data: 20/04/2021</p>
         <div class="opitions" >
-            <a  href="#"><button class="edit" >Edit</button></a>
-            <a href="/delete/{{publication.id}}">
+            <a  href="{{ url_for('update_publication', id=publication.id  ) }}"><button class="edit" >Edit</button></a>
+            <a href="{{ url_for('delete_publication', id=publication.id  ) }}">
                 <button 
                     onclick="return confirm('deseja excluir esta publicação')" 
                     class="delete" >

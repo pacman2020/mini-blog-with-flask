@@ -4,7 +4,7 @@
 
 {% block conteudo %}
 <h3>Update Post</h3>
-<form action="/update/{{user.id}}" method="POST">
+<form action="{{ url_for('update_user', id=user.id  ) }}" method="POST">
     
     {{ form.csrf_token }}
     {{ form.username(placeholder="username", value=user.username ) }}

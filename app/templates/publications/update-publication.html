@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}update publication{% endblock %}
+
+{% block conteudo %}
+<h3>Update Post</h3>
+<form action="/update/{{user.id}}" method="POST">
+    
+    {{ form.csrf_token }}
+    {{ form.title(value=publication.title ) }}
+    {{ form.photo(value=publication.photo ) }}
+    {{ form.description(value=publication.description ) }}
+    
+    <input class="btn" type="submit" value="Update user">
+</form>
+{% endblock %}

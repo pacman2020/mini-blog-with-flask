@@ -3,7 +3,7 @@
 {% block title %}list user{% endblock %}
 
 {% block conteudo %}
-<a href="/new-user"><button>new-user</button></a>
+<a href="{{ url_for('create_user' ) }}"><button>new-user</button></a>
 {% for user in users %}
     <div class="posts">
         <div class="post-header">
@@ -12,8 +12,8 @@
         <div class="post-body">
             <p>{{user.email}}</p>
             <div class="opitions" >
-                <a href="/update/{{user.id}}"><button class="edit" >Edit</button></a>
-                <a href="/delete/{{user.id}}">
+                <a href="{{ url_for('update_user', id=user.id  ) }}"><button class="edit" >Edit</button></a>
+                <a href="{{ url_for('delete_user', id=user.id  ) }}">
                     <button class="delete" onclick="return confirm('deseja delete usuario {{ user.username }} ')" >
                         Delete
                     </button>

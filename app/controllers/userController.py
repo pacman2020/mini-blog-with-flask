@@ -1,13 +1,13 @@
-from app import app, request, render_template, redirect
+from app import app, request, render_template, redirect, url_for
 from app.models.User import UserModel
 from app.forms import UserForm, UserFormUpdate
 
-@app.route('/list-user')
+@app.route('/user/')
 def list_user():
     users = UserModel.query.all()
     return render_template('users/list-user.html',users=users)
 
-@app.route('/new-user',  methods=['GET', 'POST'])
+@app.route('/user/new',  methods=['GET', 'POST'])
 def create_user():
     form = UserForm(request.form)
     if request.method == 'POST' and form.validate():
@@ -16,10 +16,10 @@ def create_user():
             email=form.email.data,
             password=form.password.data)
         new_user.save_user()
-        return redirect('/list-user')
+        return redirect(url_for('list_user'))
     return render_template('users/create-user.html', form=form)
 
-@app.route('/update/<int:id>', methods=['GET', 'POST'])
+@app.route('/user/update/<int:id>', methods=['GET', 'POST'])
 def update_user(id):
     form = UserFormUpdate(request.form)
     user = UserModel.find_by_user(id)
@@ -27,18 +27,14 @@ def update_user(id):
     if request.method == 'POST' and form.validate():
         user.username=form.username.data
         user.save_user()
-        return redirect('/list-user')
+        return redirect(url_for('list_user'))
     return render_template('users/update-user.html', form=form, user=user )
 
-@app.route('/delete/<int:id>')
+@app.route('/user/delete/<int:id>')
 def delete_user(id):
     user = UserModel.find_by_user(id)
     error = 'usuario nao encontrado!'
     if user:
-        try:
-            user.delete_user()
-            return redirect('/list-user')
-        except:
-            error = 'erro ao deletar usuario'
-            return redirect('/list-user', error=error )
+        user.delete_user()
+        return redirect(url_for('list_user'))
     return redirect('/list-user', error=error )
