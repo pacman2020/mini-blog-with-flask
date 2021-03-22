@@ -8,10 +8,11 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import os
 
-app = Flask(__name__,static_url_path='/static')
+app = Flask(__name__)
 
 #config
 app.config.from_object('config')
+
 
 db = SQLAlchemy(app)
 Migrate(app, db)

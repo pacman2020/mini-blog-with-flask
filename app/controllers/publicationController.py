@@ -33,15 +33,15 @@ def create_publication():
         #taking form data and turning it into dictionaries
         file = request.files['photo']
         data = request.form.to_dict() 
-        data['photo'] = file.filename
+        data['photo'] = file
 
         #validated form fields
-        form = PublicationForm(**data)        
+        form = PublicationForm(**data)
         if form.validate():
             
             new_publication = PublicationModel(
                 title=form.title.data,
-                photo=form.photo.data,
+                photo=file.filename,
                 description=form.description.data)
             
             #path and name of the file to be saved
@@ -51,11 +51,24 @@ def create_publication():
             file.save(save_path)
             
             #logged in user
-            new_publication.user_id = 1
+            new_publication.user_id = 1 #usuario temporario ate criar login
             
             new_publication.save_publication()
             return redirect(url_for('list_publication'))
     return render_template('publications/create-publication.html', form=form)
+
+
+@app.route('/publication/update/<int:id>', methods=['GET', 'POST'])
+def update_publication(id):
+    
+    publication = PublicationModel.find_by_publication(id)
+    publication['photo'] = 'save_path' #colocar arquivo
+    form = PublicationForm(obj=publication)
+
+    return render_template(
+        'publications/update-publication.html', 
+        form=form, publication=publication)
+
 
 @app.route('/publication/<int:id>')
 def detail_publication(id):
@@ -71,34 +84,3 @@ def delete_publication(id):
         publication.delete_publication()
         return  redirect(url_for('list_publication'))
     return redirect(url_for('list_publication'))
-
-# @app.route('/publication/update/<int:id>', methods=['GET', 'POST'])
-# def update_publication(id):
-    
-#     form = PublicationForm()
-#     publication = PublicationModel().find_by_publication(id=id)
-    
-#     if request.method == 'POST':
-#         #getting files file
-#         #taking form data and turning it into dictionaries
-#         file = request.files['photo']
-#         data = request.form.to_dict() 
-#         data['photo'] = file.filename
-
-#         #validated form fields
-#         # form = PublicationForm(**data)        
-#         # if form.validate():
-#             # new_publication = PublicationModel().find_by_publication(id=id)
-            
-#             # #path and name of the file to be saved
-#             # #saving file in the uploads directory 
-#             # save_path = os.path.join(
-#             #     UPLOAD_FOLDER, secure_filename(file.filename))
-#             # file.save(save_path)
-            
-#             # #logged in user
-#             # new_publication.user_id = 1
-            
-#             # new_publication.save_publication()
-#         return redirect('/')
-#     return render_template('publications/create-publication.html', form=form, publication=publication)

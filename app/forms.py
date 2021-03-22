@@ -4,7 +4,7 @@ from wtforms import (
     FileField, 
     TextAreaField)
 from wtforms.validators import DataRequired
-
+from flask_wtf.file import FileRequired
 
 class UserForm(Form):
     username = StringField('Username', validators=[DataRequired()])
@@ -16,5 +16,5 @@ class UserFormUpdate(Form):
     
 class PublicationForm(Form):
     title = StringField('Title', validators=[DataRequired()])
-    photo = FileField('Photo', validators=[DataRequired()])
+    photo = FileField('Photo')
     description = TextAreaField('description', validators=[DataRequired()])

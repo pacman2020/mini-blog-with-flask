@@ -4,12 +4,15 @@
 
 {% block conteudo %}
 <h3>Update Post</h3>
-<form action="/update/{{user.id}}" method="POST">
+<form 
+    action="{{ url_for('update_publication', id=publication.id) }}" 
+    method="POST" enctype="multipart/form-data">
     
     {{ form.csrf_token }}
-    {{ form.title(value=publication.title ) }}
-    {{ form.photo(value=publication.photo ) }}
-    {{ form.description(value=publication.description ) }}
+
+    {{ form.title }}
+    {{ form.photo }}
+    {{ form.description }}
     
     <input class="btn" type="submit" value="Update user">
 </form>
