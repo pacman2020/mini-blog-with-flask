@@ -12,6 +12,9 @@
 
     {{ form.title }}
     {{ form.photo }}
+
+    <img src="/static/uploads/{{ publication.photo }}" alt="" srcset="">
+
     {{ form.description }}
     
     <input class="btn" type="submit" value="Update user">
