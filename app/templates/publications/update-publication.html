@@ -11,7 +11,10 @@
     {{ form.csrf_token }}
 
     {{ form.title }}
-    {{ form.photo }}
+    {{ form.photo(value=publication.photo) }}
+    <img width="200" style="margin-bottom: 10px;"
+        src="{{ url_for('static', filename = 'uploads/'+publication.photo ) }}"
+        alt="{{publication.photo}}">
     {{ form.description }}
     
     <input class="btn" type="submit" value="Update user">

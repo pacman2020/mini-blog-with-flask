@@ -62,8 +62,43 @@ def create_publication():
 def update_publication(id):
     
     publication = PublicationModel.find_by_publication(id)
-    publication['photo'] = 'save_path' #colocar arquivo
     form = PublicationForm(obj=publication)
+    
+    if request.method == 'POST':
+        
+        file = request.files['photo']
+        data = request.form.to_dict() 
+        
+        if file:
+            data['photo'] = file
+            form = PublicationForm(**data)
+            if form.validate():
+                publication.title = form.title.data
+                publication.description = form.description.data
+                publication.photo = file.filename
+                #path and name of the file to be saved
+                #saving file in the uploads directory 
+                save_path = os.path.join(
+                    UPLOAD_FOLDER, secure_filename(file.filename))
+                file.save(save_path)
+                
+                #logged in user
+                # publication.user_id = 1 #usuario temporario ate criar login
+                
+                publication.save_publication()
+                return redirect(url_for('list_publication'))
+        
+        
+        data['photo'] = publication.photo
+        form = PublicationForm(**data)
+        if form.validate():
+            publication.title = form.title.data
+            publication.description = form.description.data
+            # print('--->', publication)
+            
+            publication.save_publication()
+            return redirect(url_for('list_publication'))
+
 
     return render_template(
         'publications/update-publication.html', 
