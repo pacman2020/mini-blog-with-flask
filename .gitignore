@@ -1,6 +1,12 @@
 env/
 __pycache__/
-migrations/
+#migrations/
 dev.db
+app/dev.db
 __init__.pyc
-uploads/
+app/static/uploads/*.jpg
+app/static/uploads/*.png
+app/static/uploads/*.gif
+app/static/uploads/*.jpeg
+.vscode/
+.vscode/*

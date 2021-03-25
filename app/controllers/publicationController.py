@@ -62,7 +62,8 @@ def create_publication():
 def update_publication(id):
     
     publication = PublicationModel.find_by_publication(id)
-    publication['photo'] = 'save_path' #colocar arquivo
+    #print(publication.photo)
+    #publication['photo'] = 'save_path' #colocar arquivo
     form = PublicationForm(obj=publication)
 
     return render_template(
