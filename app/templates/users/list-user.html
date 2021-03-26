@@ -11,6 +11,7 @@
         </div>
         <div class="post-body">
             <p>{{user.email}}</p>
+            <p>{{user.password}}</p>
             <div class="opitions" >
                 <a href="{{ url_for('update_user', id=user.id  ) }}"><button class="edit" >Edit</button></a>
                 <a href="{{ url_for('delete_user', id=user.id  ) }}">

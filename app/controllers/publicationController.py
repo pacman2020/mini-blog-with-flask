@@ -10,13 +10,10 @@ from app.models.Publication import PublicationModel
 from app.forms import PublicationForm
 
 
-#privatiza rotas
+
 #paginação
-#cria login pega usuario logado pra user_id
-#criptografa senha
 #deletar usuario deletar tudo sore ele
 #filtro de busca
-#update publicação
 
 @app.route('/publication/')
 def list_publication():
@@ -57,7 +54,6 @@ def create_publication():
             return redirect(url_for('list_publication'))
     return render_template('publications/create-publication.html', form=form)
 
-
 @app.route('/publication/update/<int:id>', methods=['GET', 'POST'])
 def update_publication(id):
     
@@ -88,7 +84,6 @@ def update_publication(id):
                 publication.save_publication()
                 return redirect(url_for('list_publication'))
         
-        
         data['photo'] = publication.photo
         form = PublicationForm(**data)
         if form.validate():
@@ -99,11 +94,9 @@ def update_publication(id):
             publication.save_publication()
             return redirect(url_for('list_publication'))
 
-
     return render_template(
         'publications/update-publication.html', 
         form=form, publication=publication)
-
 
 @app.route('/publication/<int:id>')
 def detail_publication(id):

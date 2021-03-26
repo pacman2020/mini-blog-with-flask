@@ -2,6 +2,11 @@ from app import app, request, render_template, redirect, url_for
 from app.models.User import UserModel
 from app.forms import UserForm, UserFormUpdate
 
+
+#cria login pega usuario logado pra user_id
+#criptografa senha
+#privatiza rotas
+
 @app.route('/user/')
 def list_user():
     users = UserModel.query.all()
@@ -15,6 +20,8 @@ def create_user():
             username=form.username.data,
             email=form.email.data,
             password=form.password.data)
+        
+        new_user.hash_password()
         new_user.save_user()
         return redirect(url_for('list_user'))
     return render_template('users/create-user.html', form=form)

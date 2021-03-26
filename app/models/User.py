@@ -1,4 +1,5 @@
 from app import db
+import hashlib
 
 class UserModel(db.Model):
     __tablename__='users'
@@ -19,6 +20,14 @@ class UserModel(db.Model):
     def save_user(self):
         db.session.add(self)
         db.session.commit()
+        
+    def hash_password(self):
+        self.password = hashlib.sha256(str.encode(self.password)).hexdigest()
+    
+    def check_hash(self, password):
+        if hashlib.sha256(str.encode(password)).hexdigest() == self.password:
+            return True
+        return False
     
     @classmethod  
     def find_by_user(cls, id):
