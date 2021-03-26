@@ -29,6 +29,9 @@ class UserModel(db.Model):
             return True
         return False
     
+    def find_email(self):
+        pass
+    
     @classmethod  
     def find_by_user(cls, id):
         user = UserModel.query.get(id)

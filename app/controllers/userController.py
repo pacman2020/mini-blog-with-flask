@@ -1,10 +1,9 @@
 from app import app, request, render_template, redirect, url_for
 from app.models.User import UserModel
-from app.forms import UserForm, UserFormUpdate
+from app.forms import UserForm, UserFormUpdate, LoginForm
 
-
+#cria login
 #cria login pega usuario logado pra user_id
-#criptografa senha
 #privatiza rotas
 
 @app.route('/user/')
@@ -45,3 +44,9 @@ def delete_user(id):
         user.delete_user()
         return redirect(url_for('list_user'))
     return redirect('/list-user', error=error )
+
+@app.route('/login')
+def login():
+    form = UserForm(request.form)
+    
+    return render_template('users/login.html', form=form)
