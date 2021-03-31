@@ -4,3 +4,4 @@ migrations/
 dev.db
 __init__.pyc
 uploads/
+.vscode/
