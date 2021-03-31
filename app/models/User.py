@@ -1,13 +1,19 @@
-from app import db
+from app import db, login_manager, UserMixin
 import hashlib
 
-class UserModel(db.Model):
+
+@login_manager.user_loader
+def load_user(user_id):
+    return UserModel.get(user_id)
+
+class UserModel(UserMixin, db.Model):
     __tablename__='users'
     
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80))
     email = db.Column(db.String(80), unique=True)
     password = db.Column(db.String(80))
+    
     
     def __repr__(self) -> str:
         return f'{self.username}'
@@ -29,8 +35,12 @@ class UserModel(db.Model):
             return True
         return False
     
-    def find_email(self):
-        pass
+    @classmethod
+    def find_email(cls, email):
+        user = cls.query.filter_by(email=email).first()
+        if user:
+            return user
+        return None
     
     @classmethod  
     def find_by_user(cls, id):

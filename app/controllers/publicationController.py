@@ -5,6 +5,7 @@ from app import (
     request, 
     render_template, 
     redirect, url_for,
+    session,
     os)
 from app.models.Publication import PublicationModel
 from app.forms import PublicationForm

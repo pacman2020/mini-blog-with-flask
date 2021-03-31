@@ -16,9 +16,14 @@
         <ul>
             <li><a href="{{ url_for('list_publication') }}">Home</a></li>
             <li><a href="{{ url_for('list_user') }}">list-user</a></li>
+            <!-- <li><a href="{{ url_for('logout') }}">logout</a></li> -->
             <li><a href="{{ url_for('login') }}">login</a></li>
-            <li><a href="#">logout</a></li>
         </ul>
+        {% if current_user.is_authenticated %}
+            Hi {{ current_user }}!
+        {% else %}
+            <h3>nao</h3>
+        {% endif %}
     </nav>
     <div class="container">
         {% block conteudo %}

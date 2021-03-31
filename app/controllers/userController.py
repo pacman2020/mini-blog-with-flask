@@ -1,4 +1,13 @@
-from app import app, request, render_template, redirect, url_for
+from app import(
+    app, 
+    request, 
+    render_template, 
+    redirect, 
+    url_for,
+    login_required,
+    login_user,
+    logout_user
+    )
 from app.models.User import UserModel
 from app.forms import UserForm, UserFormUpdate, LoginForm
 
@@ -6,7 +15,30 @@ from app.forms import UserForm, UserFormUpdate, LoginForm
 #cria login pega usuario logado pra user_id
 #privatiza rotas
 
-@app.route('/user/')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm(request.form)
+    if request.method == 'POST' and form.validate():
+        user = UserModel.find_email(form.email.data)
+        
+        if user.check_hash(request.form['password']) and user:
+            
+            #guardando na session
+            login_user(user)
+            return redirect(url_for('list_publication'))
+            
+    return render_template('users/login.html', form=form)
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+
+
+@app.route('/user')
+@login_required
 def list_user():
     users = UserModel.query.all()
     return render_template('users/list-user.html',users=users)
@@ -30,11 +62,15 @@ def update_user(id):
     form = UserFormUpdate(request.form)
     user = UserModel.find_by_user(id)
     
+    # print('---->', session['username'] )
+    # if  'username' in session:
+        
     if request.method == 'POST' and form.validate():
         user.username=form.username.data
         user.save_user()
         return redirect(url_for('list_user'))
     return render_template('users/update-user.html', form=form, user=user )
+    # return redirect(url_for('list_user'))
 
 @app.route('/user/delete/<int:id>')
 def delete_user(id):
@@ -45,8 +81,3 @@ def delete_user(id):
         return redirect(url_for('list_user'))
     return redirect('/list-user', error=error )
 
-@app.route('/login')
-def login():
-    form = UserForm(request.form)
-    
-    return render_template('users/login.html', form=form)
