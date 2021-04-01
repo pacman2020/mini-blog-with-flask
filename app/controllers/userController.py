@@ -57,7 +57,7 @@ def update_user(id):
     form = UserFormUpdate(request.form)
     user = UserModel.find_by_user(id)
         
-    if request.method == 'POST' and form.validate():
+    if request.method == 'POST' and form.validate() and user == current_user:
         user.username=form.username.data
         user.save_user()
         return redirect(url_for('list_user'))
