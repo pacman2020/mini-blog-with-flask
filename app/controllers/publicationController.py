@@ -1,12 +1,8 @@
 from werkzeug.utils import secure_filename
+from flask import request, redirect, render_template, url_for
 from config import UPLOAD_FOLDER
-from app import (
-    app, 
-    request, 
-    render_template, 
-    redirect, url_for,
-    session,
-    os)
+import os
+from app import app
 from app.models.Publication import PublicationModel
 from app.forms import PublicationForm
 

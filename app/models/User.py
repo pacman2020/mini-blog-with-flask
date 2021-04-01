@@ -1,10 +1,7 @@
-from app import db, login_manager, UserMixin
+from app import db
 import hashlib
+from flask_login import UserMixin
 
-
-@login_manager.user_loader
-def load_user(user_id):
-    return UserModel.get(user_id)
 
 class UserModel(UserMixin, db.Model):
     __tablename__='users'

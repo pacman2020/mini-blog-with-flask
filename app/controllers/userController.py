@@ -1,13 +1,6 @@
-from app import(
-    app, 
-    request, 
-    render_template, 
-    redirect, 
-    url_for,
-    login_required,
-    login_user,
-    logout_user
-    )
+from app import app
+from flask import redirect, render_template, url_for, request
+from flask_login import  login_required, login_user, logout_user
 from app.models.User import UserModel
 from app.forms import UserForm, UserFormUpdate, LoginForm
 

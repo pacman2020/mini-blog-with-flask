@@ -1,31 +1,26 @@
-from flask import (
-    Flask, 
-    request,
-    render_template, 
-    redirect, url_for,
-    session)
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-import os
-from flask_login import (
-    LoginManager, 
-    UserMixin, 
-    login_user, 
-    logout_user, 
-    login_required)
+from flask_login import LoginManager
 
 app = Flask(__name__)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+#redirecionamento de rotas privadas
 login_manager.login_view = 'login'
 
-#config
+@login_manager.user_loader
+def load_user(user_id):
+    return UserModel.get(user_id)
+
+#config keys, sqlalchemy
 app.config.from_object('config')
 
 db = SQLAlchemy(app)
 Migrate(app, db)
+
 
 #models
 from .models.User import UserModel
