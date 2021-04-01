@@ -5,7 +5,7 @@ import os
 from app import app
 from app.models.Publication import PublicationModel
 from app.forms import PublicationForm
-
+from flask_login import current_user, login_required
 
 
 #paginação
@@ -18,6 +18,7 @@ def list_publication():
     return render_template('publications/list-publication.html', publications=publications)
 
 @app.route('/publication/new', methods=['GET', 'POST'])
+@login_required
 def create_publication():
     
     form = PublicationForm()
@@ -45,13 +46,14 @@ def create_publication():
             file.save(save_path)
             
             #logged in user
-            new_publication.user_id = 1 #usuario temporario ate criar login
+            new_publication.user_id = current_user.id
             
             new_publication.save_publication()
             return redirect(url_for('list_publication'))
     return render_template('publications/create-publication.html', form=form)
 
 @app.route('/publication/update/<int:id>', methods=['GET', 'POST'])
+@login_required
 def update_publication(id):
     
     publication = PublicationModel.find_by_publication(id)
@@ -103,9 +105,10 @@ def detail_publication(id):
     return redirect(url_for('list_publication'))
 
 @app.route('/publication/delete/<int:id>')
+@login_required
 def delete_publication(id):
     publication = PublicationModel.query.get(id)
-    if publication:
+    if publication and publication.user_id == current_user.id :
         publication.delete_publication()
         return  redirect(url_for('list_publication'))
     return redirect(url_for('list_publication'))
