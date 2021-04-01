@@ -59,7 +59,7 @@ def update_publication(id):
     publication = PublicationModel.find_by_publication(id)
     form = PublicationForm(obj=publication)
     
-    if request.method == 'POST':
+    if request.method == 'POST' and publication.user_id == current_user.id:
         
         file = request.files['photo']
         data = request.form.to_dict() 
@@ -76,9 +76,6 @@ def update_publication(id):
                 save_path = os.path.join(
                     UPLOAD_FOLDER, secure_filename(file.filename))
                 file.save(save_path)
-                
-                #logged in user
-                # publication.user_id = 1 #usuario temporario ate criar login
                 
                 publication.save_publication()
                 return redirect(url_for('list_publication'))
