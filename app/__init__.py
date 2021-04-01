@@ -13,7 +13,10 @@ login_manager.login_view = 'login'
 
 @login_manager.user_loader
 def load_user(user_id):
-    return UserModel.get(user_id)
+    try:
+        return UserModel.query.get(user_id)
+    except KeyError:
+        return None
 
 #config keys, sqlalchemy
 app.config.from_object('config')
