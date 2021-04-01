@@ -18,11 +18,10 @@
             <li><a href="{{ url_for('list_user') }}">list-user</a></li>
 
             {% if current_user.is_authenticated %}
-                {{ current_user }}!
                 <li><a href="{{ url_for('logout') }}">logout</a></li>
+                <li>{{ current_user }}!</li>
             {% else %}
                 <li><a href="{{ url_for('login') }}">login</a></li>
-                <h3>nao</h3>
             {% endif %}
             
         </ul>
