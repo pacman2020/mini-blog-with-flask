@@ -1,6 +1,6 @@
 from app import app
 from flask import redirect, render_template, url_for, request
-from flask_login import  login_required, login_user, logout_user
+from flask_login import  login_required, login_user, logout_user, current_user
 from app.models.User import UserModel
 from app.forms import UserForm, UserFormUpdate, LoginForm
 
@@ -37,6 +37,7 @@ def list_user():
     return render_template('users/list-user.html',users=users)
 
 @app.route('/user/new',  methods=['GET', 'POST'])
+@login_required
 def create_user():
     form = UserForm(request.form)
     if request.method == 'POST' and form.validate():
@@ -51,26 +52,26 @@ def create_user():
     return render_template('users/create-user.html', form=form)
 
 @app.route('/user/update/<int:id>', methods=['GET', 'POST'])
+@login_required
 def update_user(id):
     form = UserFormUpdate(request.form)
     user = UserModel.find_by_user(id)
-    
-    # print('---->', session['username'] )
-    # if  'username' in session:
         
     if request.method == 'POST' and form.validate():
         user.username=form.username.data
         user.save_user()
         return redirect(url_for('list_user'))
     return render_template('users/update-user.html', form=form, user=user )
-    # return redirect(url_for('list_user'))
+
 
 @app.route('/user/delete/<int:id>')
+@login_required
 def delete_user(id):
     user = UserModel.find_by_user(id)
-    error = 'usuario nao encontrado!'
     if user:
-        user.delete_user()
+        if user == current_user:
+            user.delete_user()
+            return redirect(url_for('list_user'))
         return redirect(url_for('list_user'))
-    return redirect('/list-user', error=error )
+    return redirect('/list-user' )
 

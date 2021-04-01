@@ -15,7 +15,7 @@
     <nav>
         <ul>
             <li><a href="{{ url_for('list_publication') }}">Home</a></li>
-            <li><a href="{{ url_for('list_user') }}">list-user</a></li>
+            <li><a href="{{ url_for('list_user') }}">Admin</a></li>
 
             {% if current_user.is_authenticated %}
                 <li><a href="{{ url_for('logout') }}">logout</a></li>
