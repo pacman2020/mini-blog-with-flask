@@ -6,20 +6,11 @@ from app import app
 from app.models.Publication import PublicationModel
 from app.forms import PublicationForm
 from flask_login import current_user, login_required
-from flask_paginate import Pagination, get_page_parameter
 
-#paginação
-#filtro de busca
 
-@app.route('/publication/')
+@app.route('/')
 def list_publication():
     search = request.args.get('search')
-    
-    if search:
-        publications = PublicationModel.query.filter(title=search)
-    else:
-        publications = PublicationModel.query.order_by(PublicationModel.id.desc())
-    
     #paginação
     page = request.args.get('page')
     
@@ -27,15 +18,19 @@ def list_publication():
         page = int(page)
     else:
         page = 1
-        
-    publications = PublicationModel.query.paginate(page=page, per_page=2)
+
+    
+    if search:
+        publications = PublicationModel.query.filter_by(title=search).paginate(page=page, per_page=2)
+    else:
+        publications = PublicationModel.query.order_by(PublicationModel.id.desc()).paginate(page=page, per_page=2)
     
     return render_template(
         'publications/list-publication.html', 
         publications=publications)
     
 
-@app.route('/publication/new', methods=['GET', 'POST'])
+@app.route('/new', methods=['GET', 'POST'])
 @login_required
 def create_publication():
     
@@ -70,7 +65,7 @@ def create_publication():
             return redirect(url_for('list_publication'))
     return render_template('publications/create-publication.html', form=form)
 
-@app.route('/publication/update/<int:id>', methods=['GET', 'POST'])
+@app.route('/update/<int:id>', methods=['GET', 'POST'])
 @login_required
 def update_publication(id):
     
@@ -112,14 +107,14 @@ def update_publication(id):
         'publications/update-publication.html', 
         form=form, publication=publication)
 
-@app.route('/publication/<int:id>')
+@app.route('/<int:id>')
 def detail_publication(id):
     publication = PublicationModel.find_by_publication(id=id)
     if publication:
         return render_template('publications/detail-publication.html', publication=publication)
     return redirect(url_for('list_publication'))
 
-@app.route('/publication/delete/<int:id>')
+@app.route('/delete/<int:id>')
 @login_required
 def delete_publication(id):
     publication = PublicationModel.query.get(id)
