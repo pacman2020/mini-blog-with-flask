@@ -28,7 +28,7 @@ def list_publication():
     else:
         page = 1
         
-    publications = PublicationModel.query.paginate(page=page, per_page=4)
+    publications = PublicationModel.query.paginate(page=page, per_page=2)
     
     return render_template(
         'publications/list-publication.html', 

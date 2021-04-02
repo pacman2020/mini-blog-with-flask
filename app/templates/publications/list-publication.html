@@ -4,8 +4,29 @@
 
 {% block conteudo %}
 
+
+
+
+
+<a href="{{ url_for('create_publication' ) }}"><button>new-publication</button></a>
+{% for publication in publications.items %}
+    <div class="posts">
+        
+        <div class="post-header">
+            <h3>{{publication.title}}</h3>
+            <img width="40%" src="/static/uploads/{{publication.photo}}" alt="{{publication.photo}}">
+        </div>
+        <div class="post-body">
+            <p>{{publication.title}}</p>
+            <p>{{publication.description}}</p>
+            <p><a href="{{ url_for('detail_publication', id=publication.id ) }}">veja mais...</a></p>
+        </div>
+    </div>
+{% endfor %}
+
+
+<!-- Pagination Links-->
 <div class="pagination">
-    <!-- Pagination Links-->
     {% if publications.has_prev%}
     <a href="{{ url_for('list_publication', page=publications.prev_num) }}" class="btn btn-outline-dark ">
         voltar
@@ -16,11 +37,11 @@
     <ul class="page">
         {% if publications.pages%}
         {% if publications.prev_num == None%}
-        <li>1</li>
+        <li class="number-page" >1</li>
         {% else %}
-        <li>{{ publications.prev_num + 1 }}</li>
+        <li class="number-page" >{{ publications.prev_num + 1 }}</li>
         {% endif %}
-        <li>total-{{ publications.pages }}</li>
+        <li class="number-page">total-{{ publications.pages }}</li>
         {% endif %}
     </ul>
 
@@ -30,24 +51,5 @@
     </a>
     {% endif %}
 </div>
-
-
-
-<a href="{{ url_for('create_publication' ) }}"><button>new-publication</button></a>
-{% for publication in publications.items %}
-    <div class="posts">
-        
-        <div class="post-header">
-            <h3>{{publication.title}}</h3>
-            <img width="50%" src="/static/uploads/{{publication.photo}}" alt="{{publication.photo}}">
-        </div>
-        <div class="post-body">
-            <p>{{publication.title}}</p>
-            <p>{{publication.description}}</p>
-            <p><a href="{{ url_for('detail_publication', id=publication.id ) }}">veja mais...</a></p>
-        </div>
-    </div>
-{% endfor %}
-
 
 {% endblock %}

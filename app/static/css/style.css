@@ -119,6 +119,11 @@ footer{
 
 /* pagination */
 .pagination {
+    padding: 10px;
+}
+
+
+.pagination {
     display: flex;
     justify-content: center;
 }
@@ -127,13 +132,22 @@ footer{
     display: inline;
 }
 
+.pagination .page , .number-page{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    padding: 5px;
+    background-color: rgb(21, 136, 36);
+    margin: 0px 2px;
+}
+
 .pagination a{
     text-decoration: none;
-    color: green;
-    padding: 10px;
+    color: rgb(255, 255, 255);
+    padding: 5px;
+    background-color:  rgb(21, 136, 36);
 }
 
 .pagination a:hover {
-    background-color: rgb(25, 151, 42);
+    background-color: rgb(46, 197, 66);
     color: white;
 }
