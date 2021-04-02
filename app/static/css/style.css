@@ -116,3 +116,24 @@ footer{
     color: white;
     background-color: rgb(240, 110, 110);
 }
+
+/* pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination ul li{
+    display: inline;
+}
+
+.pagination a{
+    text-decoration: none;
+    color: green;
+    padding: 10px;
+}
+
+.pagination a:hover {
+    background-color: rgb(25, 151, 42);
+    color: white;
+}

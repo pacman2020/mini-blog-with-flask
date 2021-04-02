@@ -6,16 +6,34 @@ from app import app
 from app.models.Publication import PublicationModel
 from app.forms import PublicationForm
 from flask_login import current_user, login_required
-
+from flask_paginate import Pagination, get_page_parameter
 
 #paginação
-#deletar usuario deletar tudo sore ele
 #filtro de busca
 
 @app.route('/publication/')
 def list_publication():
-    publications = PublicationModel.query.all()
-    return render_template('publications/list-publication.html', publications=publications)
+    search = request.args.get('search')
+    
+    if search:
+        publications = PublicationModel.query.filter(title=search)
+    else:
+        publications = PublicationModel.query.order_by(PublicationModel.id.desc())
+    
+    #paginação
+    page = request.args.get('page')
+    
+    if page and page.isdigit():
+        page = int(page)
+    else:
+        page = 1
+        
+    publications = PublicationModel.query.paginate(page=page, per_page=4)
+    
+    return render_template(
+        'publications/list-publication.html', 
+        publications=publications)
+    
 
 @app.route('/publication/new', methods=['GET', 'POST'])
 @login_required

@@ -3,9 +3,40 @@
 {% block title %}list publications{% endblock %}
 
 {% block conteudo %}
+
+<div class="pagination">
+    <!-- Pagination Links-->
+    {% if publications.has_prev%}
+    <a href="{{ url_for('list_publication', page=publications.prev_num) }}" class="btn btn-outline-dark ">
+        voltar
+    </a>
+    {% endif %}
+
+
+    <ul class="page">
+        {% if publications.pages%}
+        {% if publications.prev_num == None%}
+        <li>1</li>
+        {% else %}
+        <li>{{ publications.prev_num + 1 }}</li>
+        {% endif %}
+        <li>total-{{ publications.pages }}</li>
+        {% endif %}
+    </ul>
+
+    {% if publications.has_next%}
+    <a href="{{ url_for('list_publication', page=publications.next_num) }}" class="btn btn-outline-dark ">
+        proximo
+    </a>
+    {% endif %}
+</div>
+
+
+
 <a href="{{ url_for('create_publication' ) }}"><button>new-publication</button></a>
-{% for publication in publications %}
+{% for publication in publications.items %}
     <div class="posts">
+        
         <div class="post-header">
             <h3>{{publication.title}}</h3>
             <img width="50%" src="/static/uploads/{{publication.photo}}" alt="{{publication.photo}}">
