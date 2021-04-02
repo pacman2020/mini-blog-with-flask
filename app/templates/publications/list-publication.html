@@ -4,14 +4,16 @@
 
 {% block conteudo %}
 
-<form action="{{ url_for('list_publication' ) }}" method="get">
-    <input type="text" name="search" >
-    <button type="submit">seach</button>
-</form>
-
-
-
-<a href="{{ url_for('create_publication' ) }}"><button>new-publication</button></a>
+<div class="action-list">
+    <a href="{{ url_for('create_publication' ) }}">
+        <button class="btn-new" >new-publication</button>
+    </a>
+    <form class="search" action="{{ url_for('list_publication' ) }}" method="get">
+        <input type="text" name="search" placeholder="which title name" >
+        <button type="submit">seach</button>
+    </form>
+    
+</div>
 
 {% for publication in publications.items %}
     <div class="posts">

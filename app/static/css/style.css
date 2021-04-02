@@ -16,8 +16,6 @@ header h1{
     color: rgb(245, 245, 245);
 }
 
-
-
 nav {
     text-align: center;
     margin: 0px 40px;
@@ -47,6 +45,43 @@ footer{
     margin: 0px 40px;
     margin-top: 42px;
 }
+
+.container .action-list{
+    display: flex;
+    justify-content: space-between;
+}
+
+.container .action-list{
+    margin: 0px 10px;
+}
+
+.container .action-list form input{
+    margin-top: 1px;
+}
+
+.container  .search{
+    display: inline;
+}
+
+.container .search button{
+    padding: 10px;
+    width: 60px;
+    color: rgb(248, 248, 248);
+    border: 0px;
+    border-radius: 4px;
+    background-color:  rgb(15, 133, 15);
+}
+
+.container .action-list .btn-new{
+    padding: 10px;
+    width: 160px;
+    color: rgb(240, 240, 240);
+    border: 0px;
+    border-radius: 4px;
+    background-color: rgb(15, 133, 15);
+}
+
+
 
 .container{
     margin: 0px 40px;
@@ -121,7 +156,6 @@ footer{
 .pagination {
     padding: 10px;
 }
-
 
 .pagination {
     display: flex;

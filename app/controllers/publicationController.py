@@ -21,15 +21,15 @@ def list_publication():
 
     
     if search:
-        publications = PublicationModel.query.filter_by(title=search).paginate(page=page, per_page=2)
+        publications = PublicationModel.query.filter_by(
+            title=search).paginate(page=page, per_page=2)
     else:
-        publications = PublicationModel.query.order_by(PublicationModel.id.desc()).paginate(page=page, per_page=2)
+        publications = PublicationModel.query.order_by(
+            PublicationModel.id.desc()).paginate(page=page, per_page=2)
     
     return render_template(
-        'publications/list-publication.html', 
-        publications=publications)
+        'publications/list-publication.html', publications=publications)
     
-
 @app.route('/new', methods=['GET', 'POST'])
 @login_required
 def create_publication():
